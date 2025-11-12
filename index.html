@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title></title>
+  <style>
+    /* Basic page styling */
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+      background: #f4f4f4;
+      padding: 20px;
+    }
+
+    h2 {
+      text-align: center;
+      color: #333;
+    }
+
+    .upload-box {
+      background: #fff;
+      border-radius: 15px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      padding: 20px;
+      width: 100%;
+      max-width: 400px;
+      text-align: center;
+    }
+
+    input[type="file"] {
+      display: none;
+    }
+
+    label {
+      display: inline-block;
+      background-color: #007bff;
+      color: white;
+      padding: 10px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-bottom: 15px;
+    }
+
+    label:hover {
+      background-color: #0056b3;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 10px;
+      margin-top: 10px;
+      object-fit: contain;
+    }
+
+    @media (max-width: 600px) {
+      .upload-box {
+        width: 90%;
+        padding: 15px;
+      }
+
+      label {
+        padding: 8px 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="upload-box">
+    <h2>Upload Your Image</h2>
+    <input type="file" id="imageUpload" accept="image/*" />
+    <label for="imageUpload">Choose Image</label>
+    <div>
+      <img id="preview" src="" alt="Your image will appear here" />
+    </div>
+  </div>
+
+  <script>
+    const imageUpload = document.getElementById("imageUpload");
+    const preview = document.getElementById("preview");
+
+    imageUpload.addEventListener("change", function() {
+      const file = this.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = function(event) {
+          preview.src = event.target.result;
+        }
+        reader.readAsDataURL(file);
+      }
+    });
+  </script>
+</body>
+</html>
